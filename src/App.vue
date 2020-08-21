@@ -1,18 +1,18 @@
 <template>
-  <div id="app">   
-    <TicTacToe msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <TicTacToe/>
   </div>
 </template>
 
 <script>
-import TicTacToe from './components/TicTacToe.vue'
+import TicTacToe from './components/TicTacToe.vue';
 
 export default {
   name: 'App',
   components: {
-    TicTacToe
-  }
-}
+    TicTacToe,
+  },
+};
 </script>
 
 <style>
