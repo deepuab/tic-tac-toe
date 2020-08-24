@@ -1,41 +1,140 @@
 <template>
-  <div>
-    <b-container>
-      <div class="gameContainer">
-        <table>
-          <tr
-            v-for="(row, rowIndex) in matrix"
-            :key="rowIndex"
+  <div class="outer-container">
+    <div class="grid-container">
+      <div
+        class="grid-item top left"
+        :class="[!matrix[0][0] &&
+          !playerOneWon && !playerTwoWon ?'pointer':'']"
+        @click="!matrix[0][0] && !playerOneWon && !playerTwoWon &&
+          clickCell(0,0)"
+      >
+        <div :class="[winningSelection(`${0}${0}`)?'blink':'']">
+          {{ matrix[0][0]?matrix[0][0]: '' }}
+        </div>
+      </div>
+      <div
+        class="grid-item top middle"
+        :class="[!matrix[0][1] &&
+          !playerOneWon && !playerTwoWon ?'pointer':'']"
+        @click="!matrix[0][1] && !playerOneWon && !playerTwoWon &&
+          clickCell(0,1)"
+      >
+        <div :class="[winningSelection(`${0}${1}`)?'blink':'']">
+          {{ matrix[0][1]?matrix[0][1]: '' }}
+        </div>
+      </div>
+      <div
+        class="grid-item top right"
+        :class="[!matrix[0][2] &&
+          !playerOneWon && !playerTwoWon ?'pointer':'']"
+        @click="!matrix[0][2] && !playerOneWon && !playerTwoWon &&
+          clickCell(0,2)"
+      >
+        <div :class="[winningSelection(`${0}${2}`)?'blink':'']">
+          {{ matrix[0][2]?matrix[0][2]: '' }}
+        </div>
+      </div>
+      <div
+        class="grid-item left"
+        :class="[!matrix[1][0] &&
+          !playerOneWon && !playerTwoWon ?'pointer':'']"
+        @click="!matrix[1][0] && !playerOneWon && !playerTwoWon &&
+          clickCell(1,0)"
+      >
+        <div :class="[winningSelection(`${1}${0}`)?'blink':'']">
+          {{ matrix[1][0]?matrix[1][0]: '' }}
+        </div>
+      </div>
+      <div
+        class="grid-item"
+        :class="[!matrix[1][1] &&
+          !playerOneWon && !playerTwoWon ?'pointer':'']"
+        @click="!matrix[1][1] && !playerOneWon && !playerTwoWon &&
+          clickCell(1,1)"
+      >
+        <div :class="[winningSelection(`${1}${1}`)?'blink':'']">
+          {{ matrix[1][1]?matrix[1][1]: '' }}
+        </div>
+      </div>
+      <div
+        class="grid-item right"
+        :class="[!matrix[1][2] &&
+          !playerOneWon && !playerTwoWon ?'pointer':'']"
+        @click="!matrix[1][2] && !playerOneWon && !playerTwoWon &&
+          clickCell(1,2)"
+      >
+        <div :class="[winningSelection(`${1}${2}`)?'blink':'']">
+          {{ matrix[1][2]?matrix[1][2]: '' }}
+        </div>
+      </div>
+      <div
+        class="grid-item bottom left"
+        :class="[!matrix[2][0] &&
+          !playerOneWon && !playerTwoWon ?'pointer':'']"
+        @click="!matrix[2][0] && !playerOneWon && !playerTwoWon &&
+          clickCell(2,0)"
+      >
+        <div :class="[winningSelection(`${2}${0}`)?'blink':'']">
+          {{ matrix[2][0]?matrix[2][0]: '' }}
+        </div>
+      </div>
+      <div
+        class="grid-item bottom center"
+        :class="[!matrix[2][1] &&
+          !playerOneWon && !playerTwoWon ?'pointer':'']"
+        @click="!matrix[2][1] && !playerOneWon && !playerTwoWon &&
+          clickCell(2,1)"
+      >
+        <div :class="[winningSelection(`${2}${1}`)?'blink':'']">
+          {{ matrix[2][1]?matrix[2][1]: '' }}
+        </div>
+      </div>
+      <div
+        class="grid-item bottom right"
+        :class="[!matrix[2][2] &&
+          !playerOneWon && !playerTwoWon ?'pointer':'']"
+        @click="!matrix[2][2] && !playerOneWon && !playerTwoWon &&
+          clickCell(2,2)"
+      >
+        <div :class="[winningSelection(`${2}${2}`)?'blink':'']">
+          {{ matrix[2][2]?matrix[2][2]: '' }}
+        </div>
+      </div>
+    </div>
+    <!-- <div class="gameContainer">
+      <table>
+        <tr
+          v-for="(row, rowIndex) in matrix"
+          :key="rowIndex"
+        >
+          <td
+            v-for="(col,coulumnIndex) in row"
+            :key="rowIndex+coulumnIndex"
+            :style="
+              [winningSelection(`${rowIndex}${coulumnIndex}`)?{'background':'greenyellow'}:'']"
+            :class="[!matrix[rowIndex][coulumnIndex] &&
+              !playerOneWon && !playerTwoWon ?'pointer':'']"
+            @click="!matrix[rowIndex][coulumnIndex] && !playerOneWon && !playerTwoWon &&
+              clickCell(rowIndex,coulumnIndex)"
           >
-            <td
-              v-for="(col,coulumnIndex) in row"
-              :key="rowIndex+coulumnIndex"
-              :style="
-                [winningSelection(`${rowIndex}${coulumnIndex}`)?{'background':'greenyellow'}:'']"
-              :class="[!matrix[rowIndex][coulumnIndex] &&
-                !playerOneWon && !playerTwoWon ?'poniter':'']"
-              @click="e=> !matrix[rowIndex][coulumnIndex] && !playerOneWon && !playerTwoWon &&
-                clickCell(rowIndex,coulumnIndex,e)"
-            >
-              {{ matrix[rowIndex][coulumnIndex]?matrix[rowIndex][coulumnIndex]:'' }}
-            </td>
-          </tr>
-        </table>
-      </div>
-      <br/>
-      <button @click="resetGame()">
-        Reset
-      </button>
-      <div v-if="playerOneWon">
-        Player One won!!
-      </div>
-      <div v-if="playerTwoWon">
-        Player Two won!!
-      </div>
-      <div v-if="draw">
-        Draw!!
-      </div>
-    </b-container>
+            {{ matrix[rowIndex][coulumnIndex]?matrix[rowIndex][coulumnIndex]:'' }}
+          </td>
+        </tr>
+      </table>
+    </div> -->
+    <br>
+    <button @click="resetGame()">
+      Restart Game
+    </button>
+    <div v-if="playerOneWon">
+      Player One won!!
+    </div>
+    <div v-if="playerTwoWon">
+      Player Two won!!
+    </div>
+    <div v-if="draw">
+      Draw!!
+    </div>
   </div>
 </template>
 
@@ -158,28 +257,54 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-table {
-  border-collapse: collapse;
-  border: 1px solid black;
-  table-layout: fixed;
-  width: 180px;
-}
-th,td {
-  border: 1px solid black;
-  font-size: 36px;
-}
-tr{
-  min-height: 56px;
-  height: 56px;
-}
 .success{
   background: greenyellow;
 }
-.poniter{
+.pointer{
   cursor: pointer;
 }
-.gameContainer{
-  width: 15%;
+.container{
+  width: 30%;
+}
+.top{
+  border-top: 0px !important;
+}
+.bottom{
+  border-bottom: 0px  !important;
+}
+.left{
+  border-left: 0px  !important;
+}
+.right{
+  border-right: 0px  !important;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  width:300px;
   margin: auto;
+}
+.grid-item {
+  border: 2px solid white;
+  height: 85px;
+  font-size: 60px;
+  color: white;
+  text-align: center;
+  width:100px;
+}
+@-webkit-keyframes blinker {
+  from {opacity: 1.0;}
+  to {opacity: 0.0;}
+}
+.blink{
+  text-decoration: blink;
+  -webkit-animation-name: blinker;
+  -webkit-animation-duration: 0.3s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-timing-function:ease-in-out;
+  -webkit-animation-direction: alternate;
+}
+.outer-container{
+  color:white;
 }
 </style>
