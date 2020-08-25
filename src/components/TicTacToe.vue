@@ -1,5 +1,33 @@
 <template>
   <div class="outer-container">
+    <h2 v-if="!(playerOneWon||playerTwoWon||draw)">
+      Player {{ !previousSelection || previousSelection=='O'?1:2 }} Turn
+    </h2>
+    <div
+      v-if="playerOneWon"
+      class="blink"
+    >
+      <h2>
+        Player One won !!
+      </h2>
+    </div>
+    <div
+      v-if="playerTwoWon"
+      class="blink"
+    >
+      <h2>
+        Player Two won !!
+      </h2>
+    </div>
+    <div
+      v-if="draw"
+      class="blink"
+    >
+      <h2>
+        Draw !!
+      </h2>
+    </div>
+    <br>
     <div class="grid-container">
       <div
         class="grid-item top left"
@@ -126,15 +154,6 @@
     <button @click="resetGame()">
       Restart Game
     </button>
-    <div v-if="playerOneWon">
-      Player One won!!
-    </div>
-    <div v-if="playerTwoWon">
-      Player Two won!!
-    </div>
-    <div v-if="draw">
-      Draw!!
-    </div>
   </div>
 </template>
 

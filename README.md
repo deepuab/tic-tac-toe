@@ -1,4 +1,8 @@
 # tic-tac-toe
+A tic-tac-toe game project
+
+## Github Page
+https://deepuab.github.io/tic-tac-toe/
 
 ## Project setup
 ```
