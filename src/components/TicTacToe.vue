@@ -1,14 +1,14 @@
 <template>
   <div class="outer-container">
     <h2 v-if="!(playerOneWon||playerTwoWon||draw)">
-      Player {{ !previousSelection || previousSelection=='O'?1:2 }} Turn
+      Player {{ !previousSelection || previousSelection=='O'?'One (X)':'Two (O) ' }} Turn
     </h2>
     <div
       v-if="playerOneWon"
       class="blink"
     >
       <h2>
-        Player One won !!
+        Player One (X) won !
       </h2>
     </div>
     <div
@@ -16,7 +16,7 @@
       class="blink"
     >
       <h2>
-        Player Two won !!
+        Player Two (O) won !
       </h2>
     </div>
     <div
@@ -24,7 +24,7 @@
       class="blink"
     >
       <h2>
-        Draw !!
+        Draw !
       </h2>
     </div>
     <br>
@@ -129,30 +129,14 @@
         </div>
       </div>
     </div>
-    <!-- <div class="gameContainer">
-      <table>
-        <tr
-          v-for="(row, rowIndex) in matrix"
-          :key="rowIndex"
-        >
-          <td
-            v-for="(col,coulumnIndex) in row"
-            :key="rowIndex+coulumnIndex"
-            :style="
-              [winningSelection(`${rowIndex}${coulumnIndex}`)?{'background':'greenyellow'}:'']"
-            :class="[!matrix[rowIndex][coulumnIndex] &&
-              !playerOneWon && !playerTwoWon ?'pointer':'']"
-            @click="!matrix[rowIndex][coulumnIndex] && !playerOneWon && !playerTwoWon &&
-              clickCell(rowIndex,coulumnIndex)"
-          >
-            {{ matrix[rowIndex][coulumnIndex]?matrix[rowIndex][coulumnIndex]:'' }}
-          </td>
-        </tr>
-      </table>
-    </div> -->
     <br>
-    <button @click="resetGame()">
-      Restart Game
+    <div>
+      <div>Player One Score: {{ playerOneScore }}        </div>
+      <div>Player Two Score: {{ playerTwoScore }}</div>
+    </div>
+      <br>
+    <button @click="resetGame()" class="btnNewGame">
+      New Game
     </button>
   </div>
 </template>
@@ -171,8 +155,11 @@ export default {
       playerOneSelectedCells: [],
       winningData: [],
       playerOneWon: false,
+      playerOneScore: 0,
       playerTwoSelectedCells: [],
       playerTwoWon: false,
+      playerTwoScore: 0,
+      drawScore: 0,
       winningCells: [
         ['00', '01', '02'],
         ['00', '11', '22'],
@@ -236,6 +223,7 @@ export default {
         if (isPlayerWon) {
           // When player wins, winning combination is saved to winningData to mark cells
           this.winningData = com;
+          this.playerOneScore += 1;
           return true;
         }
         return false;
@@ -246,6 +234,7 @@ export default {
         if (isPlayerWon) {
           // When player wins, winning combination is saved to winningData to mark cells
           this.winningData = com;
+          this.playerTwoScore += 1;
           return true;
         }
         return false;
@@ -319,11 +308,17 @@ export default {
   text-decoration: blink;
   -webkit-animation-name: blinker;
   -webkit-animation-duration: 0.3s;
-  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-iteration-count:5;
   -webkit-animation-timing-function:ease-in-out;
   -webkit-animation-direction: alternate;
 }
 .outer-container{
   color:white;
+}
+.btnNewGame{
+    border-radius: 24px;
+    color: white;
+    background: black;
+    border: 2px solid;
 }
 </style>
